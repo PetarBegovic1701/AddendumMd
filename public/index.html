@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Addendum.md</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="icons/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="manifest" href="icons/site.webmanifest" />
+  <meta name="theme-color" content="#2f6fed" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <button class="icon-btn hamburger" id="btnMenu" title="Files" aria-label="Files">☰</button>
+      <span class="title" id="docTitle">Addendum.md</span>
+      <button class="icon-btn star" id="btnBookmark" title="Bookmark" aria-label="Bookmark" disabled>☆</button>
+      <button class="icon-btn review" id="btnReview" title="Mark reviewed" aria-label="Mark reviewed" disabled>○</button>
+      <button class="icon-btn" id="btnEdit" title="Edit" aria-label="Edit" disabled>✎</button>
+      <button class="icon-btn" id="btnDownload" title="Download this document" aria-label="Download this document" disabled>⤓</button>
+      <button class="icon-btn" id="btnSettings" title="Settings" aria-label="Settings">⚙</button>
+    </header>
+
+    <div class="body">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-head">
+          <input class="search" id="search" type="search" placeholder="Filter files…" autocomplete="off" />
+          <div class="filters">
+            <button class="filter-tab on" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="bookmarked">★ Marked</button>
+            <button class="filter-tab" data-filter="inprogress">In progress</button>
+            <button class="filter-tab" data-filter="unreviewed">Unreviewed</button>
+          </div>
+          <div class="progress">
+            <span id="progressText">0 / 0 reviewed</span>
+            <span class="bar"><i id="progressBar"></i></span>
+          </div>
+        </div>
+        <nav class="tree" id="tree"></nav>
+      </aside>
+
+      <div class="scrim" id="scrim"></div>
+
+      <main class="content" id="content">
+        <div class="reader" id="reader">
+          <div class="welcome" id="welcome">
+            <h2><img class="welcome-logo" src="./icons/icon.svg" alt=""> Addendum.md</h2>
+            <p>Pick a document from the file list to start reading.</p>
+            <div class="welcome-root">
+              <div class="welcome-root-label">Current folder</div>
+              <div class="welcome-root-path" id="welcomeRoot">…</div>
+              <div class="welcome-root-count" id="welcomeCount"></div>
+            </div>
+            <div class="welcome-actions">
+              <button class="btn primary" data-action="change-root">Change folder</button>
+              <button class="btn" data-action="help">Features guide</button>
+            </div>
+          </div>
+        </div>
+        <div class="adivider" id="aDivider" hidden><span class="grip"></span></div>
+        <div class="addendum-wrap" id="addendumWrap" hidden>
+          <textarea class="addendum" id="addendum" spellcheck="false"
+            placeholder="Write your addendum / answers here. Tap the widget to append &amp; save — tap it again while the timer runs to close."></textarea>
+        </div>
+        <textarea class="editor" id="editor" spellcheck="false" hidden></textarea>
+        <div class="dirty-bar" id="dirtyBar">
+          <span class="msg" id="dirtyMsg">Unsaved changes</span>
+          <button class="btn" id="btnRevert">Revert</button>
+          <button class="btn primary" id="btnSave">Save</button>
+        </div>
+      </main>
+    </div>
+
+    <button class="fab" id="fab" hidden aria-label="Addendum">
+      <svg class="fab-pie" viewBox="0 0 36 36" aria-hidden="true"><circle id="fabPie" cx="18" cy="18" r="9" /></svg>
+      <svg class="fab-ic" id="fabIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
+    </button>
+
+    <!-- Settings modal -->
+    <div class="modal-scrim" id="settingsModal" hidden>
+      <div class="modal">
+        <div class="modal-head">
+          <span>Settings</span>
+          <button class="icon-btn" data-close="settingsModal" aria-label="Close">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting">
+            <div class="setting-label">Root folder</div>
+            <div class="setting-value" id="settingsRoot">…</div>
+            <button class="btn primary" id="settingsChange">Change folder…</button>
+          </div>
+          <div class="setting">
+            <div class="setting-label">Download</div>
+            <div class="setting-actions">
+              <button class="btn" id="dlCurrent">This document</button>
+              <button class="btn" id="dlZip">Whole project (.zip)</button>
+              <button class="btn" id="dlBundle">Whole project (single .md)</button>
+            </div>
+          </div>
+          <div class="setting">
+            <div class="setting-label">Help</div>
+            <button class="btn" id="settingsHelp">Open features guide</button>
+          </div>
+          <div class="setting">
+            <div class="setting-label">Theme</div>
+            <button class="btn" id="settingsTheme">Toggle light / dark</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Folder picker modal -->
+    <div class="modal-scrim" id="pickerModal" hidden>
+      <div class="modal">
+        <div class="modal-head">
+          <span>Choose root folder</span>
+          <button class="icon-btn" data-close="pickerModal" aria-label="Close">✕</button>
+        </div>
+        <div class="picker-path" id="pickerPath">…</div>
+        <div class="picker-manual">
+          <input class="picker-input" id="pickerManual" type="text" spellcheck="false"
+                 autocomplete="off" autocapitalize="off" autocorrect="off"
+                 placeholder="Path or URL: \\192.168.x.x\Docs · http://192.168.x.x:8080" />
+          <button class="btn" id="pickerGo">Go</button>
+        </div>
+        <div class="picker-list" id="pickerList"></div>
+        <div class="picker-foot">
+          <span class="picker-count" id="pickerCount"></span>
+          <button class="btn primary" id="pickerUse">Use this folder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

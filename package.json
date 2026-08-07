@@ -1,0 +1,11 @@
+{
+  "name": "Addendum.md",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lightweight, zero-dependency markdown reader/editor served in the browser.",
+  "bin": { "Addendum.md": "server.js" },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": { "node": ">=16" }
+}

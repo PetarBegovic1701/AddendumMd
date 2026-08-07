@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Addendum.md">
+  <title>Addendum.md</title>
+  <defs>
+    <linearGradient id="tileFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3D7CF7"/>
+      <stop offset="1" stop-color="#204EC2"/>
+    </linearGradient>
+    <linearGradient id="badgeFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7A33D"/>
+      <stop offset="1" stop-color="#D67014"/>
+    </linearGradient>
+    <clipPath id="tileClip">
+      <rect x="0" y="0" width="256" height="256" rx="55" ry="55"/>
+    </clipPath>
+    <!-- keeps a ring of tile colour between the page and the badge -->
+    <mask id="badgeMoat">
+      <rect x="0" y="0" width="256" height="256" fill="#fff"/>
+      <circle cx="189.95" cy="191.49" r="60.93" fill="#000"/>
+    </mask>
+  </defs>
+
+  <g clip-path="url(#tileClip)">
+    <rect x="0" y="0" width="256" height="256" fill="url(#tileFill)"/>
+
+    <g mask="url(#badgeMoat)">
+      <!-- page, top-right corner turned down -->
+      <path fill="#FFFFFF" d="M72.96 43.52 H138.24 L186.88 92.16 V197.89
+               A14.08 14.08 0 0 1 172.8 211.97 H72.96
+               A14.08 14.08 0 0 1 58.88 197.89 V57.6
+               A14.08 14.08 0 0 1 72.96 43.52 Z"/>
+      <path fill="#C8D8F3" d="M138.24 43.52 V92.16 H186.88 Z"/>
+
+      <g fill="#A7BEEA">
+        <rect x="81.41" y="95.49" width="87.55" height="13.82" rx="6.91"/>
+        <rect x="81.41" y="126.21" width="87.55" height="13.82" rx="6.91"/>
+        <rect x="81.41" y="156.93" width="58.11" height="13.82" rx="6.91"/>
+      </g>
+    </g>
+
+    <!-- addendum badge -->
+    <circle cx="189.95" cy="191.49" r="51.2" fill="url(#badgeFill)"/>
+    <g fill="#FFFFFF">
+      <rect x="164.86" y="183.81" width="50.18" height="15.36" rx="7.68"/>
+      <rect x="182.27" y="166.4" width="15.36" height="50.18" rx="7.68"/>
+    </g>
+  </g>
+</svg>

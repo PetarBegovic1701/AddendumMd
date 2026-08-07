@@ -1,0 +1,8 @@
+# Runtime state (per-machine review/bookmark data + chosen root folder)
+state.json
+state.json.tmp
+config.json
+server.pid
+server.log
+PUBLISHING.md
+todo.md
