@@ -4,9 +4,6 @@ A lightweight, zero-dependency **markdown reader + editor** that runs in the
 browser. Built for reading and reviewing the pile of `.md` docs in this project,
 optimised for **mobile** use over your local network.
 
-> This is an internal utility, not part of the W-M-C-E product. It lives under
-> `tools/` and is intentionally outside the phase-gated codebase.
-
 ## What it does
 
 - Browses **only `.md` files** under a configurable root directory (recursively).
